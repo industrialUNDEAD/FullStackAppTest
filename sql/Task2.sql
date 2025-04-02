@@ -1,4 +1,4 @@
--- Создание таблиц
+-- РЎРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†
 CREATE TABLE Clients (
     Id BIGINT PRIMARY KEY,
     ClientName NVARCHAR(200)
@@ -11,14 +11,14 @@ CREATE TABLE ClientContacts (
     ContactValue NVARCHAR(255)
 );
 
--- Наполнение
+-- РќР°РїРѕР»РЅРµРЅРёРµ
 INSERT INTO Clients (Id, ClientName) VALUES
-(1, N'ООО Ромашка'),
-(2, N'ООО Картошка'),
-(3, N'ИП Иван Иваныч'),
-(4, N'ООО Дельта');
+(1, N'РћРћРћ Р РѕРјР°С€РєР°'),
+(2, N'РћРћРћ РљР°СЂС‚РѕС€РєР°'),
+(3, N'РРџ РРІР°РЅ РРІР°РЅС‹С‡'),
+(4, N'РћРћРћ Р”РµР»СЊС‚Р°');
 
--- Вставка данных в таблицу контактов
+-- Р’СЃС‚Р°РІРєР° РґР°РЅРЅС‹С… РІ С‚Р°Р±Р»РёС†Сѓ РєРѕРЅС‚Р°РєС‚РѕРІ
 INSERT INTO ClientContacts (Id, ClientId, ContactType, ContactValue) VALUES
 (1, 1, N'Email', N'rmsh@example.com'),
 (2, 1, N'Phone', N'+79999999999'),
@@ -28,7 +28,7 @@ INSERT INTO ClientContacts (Id, ClientId, ContactType, ContactValue) VALUES
 (6, 3, N'Email', N'ivanych@example.com')
 
 
--- 1. Написать запрос, который возвращает наименование клиентов и кол-во контактов клиентов
+-- 1. РќР°РїРёСЃР°С‚СЊ Р·Р°РїСЂРѕСЃ, РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰Р°РµС‚ РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РєР»РёРµРЅС‚РѕРІ Рё РєРѕР»-РІРѕ РєРѕРЅС‚Р°РєС‚РѕРІ РєР»РёРµРЅС‚РѕРІ
 
 SELECT 
     c.ClientName,
@@ -37,7 +37,7 @@ FROM Clients c
 LEFT JOIN ClientContacts cc ON c.Id = cc.ClientId
 GROUP BY c.ClientName;
 
--- 2. Написать запрос, который возвращает список клиентов, у которых есть более 2 контактов
+-- 2. РќР°РїРёСЃР°С‚СЊ Р·Р°РїСЂРѕСЃ, РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє РєР»РёРµРЅС‚РѕРІ, Сѓ РєРѕС‚РѕСЂС‹С… РµСЃС‚СЊ Р±РѕР»РµРµ 2 РєРѕРЅС‚Р°РєС‚РѕРІ
 
 SELECT 
     c.ClientName
