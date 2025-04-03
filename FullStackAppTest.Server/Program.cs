@@ -1,4 +1,4 @@
-using FullStackAppTest.Server.Application;
+﻿using FullStackAppTest.Server.Application;
 using FullStackAppTest.Server.Application.Abstractions;
 using FullStackAppTest.Server.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +14,20 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ITestObjectService, TestObjectService>();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy
+            .WithOrigins("https://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
+
+app.UseCors();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

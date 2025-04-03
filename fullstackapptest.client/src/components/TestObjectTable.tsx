@@ -10,28 +10,30 @@ export const TestObjectTable = () => {
     useEffect(() => {
         fetchTestObjects()
             .then((data) => {
-                console.log('ДАННЫЕ В СЕТ:', data);
-                setObjects([...data]);
+                setObjects(data);
             })
-            .catch(console.error);
+            .catch((error) => {
+                console.error('Ошибка загрузки данных:', error);
+            });
     }, []);
 
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     const paginated = objects.slice(startIndex, startIndex + PAGE_SIZE);
 
     const handleNext = () => {
-        if (startIndex + PAGE_SIZE < objects.length)
+        if (startIndex + PAGE_SIZE < objects.length) {
             setCurrentPage((p) => p + 1);
+        }
     };
 
     const handlePrev = () => {
-        if (currentPage > 1)
+        if (currentPage > 1) {
             setCurrentPage((p) => p - 1);
+        }
     };
 
-    console.log('ОТОБРАЖАЕМ:', objects);
     return (
-        <div>
+        <div style={{ padding: '2rem' }}>
             <h2>Список TestObject</h2>
             <table border={1} cellPadding={5} style={{ marginTop: '1rem' }}>
                 <thead>
@@ -55,7 +57,10 @@ export const TestObjectTable = () => {
                     ← Назад
                 </button>
                 <span style={{ margin: '0 1rem' }}>Страница: {currentPage}</span>
-                <button onClick={handleNext} disabled={startIndex + PAGE_SIZE >= objects.length}>
+                <button
+                    onClick={handleNext}
+                    disabled={startIndex + PAGE_SIZE >= objects.length}
+                >
                     Вперёд →
                 </button>
             </div>

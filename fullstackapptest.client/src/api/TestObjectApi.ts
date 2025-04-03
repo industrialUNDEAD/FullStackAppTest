@@ -4,11 +4,11 @@ export interface TestObject {
 }
 
 export async function fetchTestObjects(): Promise<TestObject[]> {
-    const response = await fetch('/api/TestObject');
+    const response = await fetch('http://localhost:5278/api/TestObject', {
+        mode: 'cors'
+    });
 
-    console.log('RESPONSE STATUS:', response.status);
     const json = await response.json();
-    console.log('онксвеммше дюммше:', json);
 
     return json;
 }
